@@ -1,7 +1,13 @@
 @echo off
-echo Start running %0 !!!
 set "newfile=%server%\pos\ybDevice.702.dll"
 set "oldfile=ybDevice.dll"
+set "updateid=updateid_2019061201"
+
+:: echo %cd%
+mkdir "%pos_path%"
+d:
+cd "%pos_path%"
+if exist %updateid% exit /b
 
 :: Is Windows XP?
 ver | find "5.1" > nul 
@@ -12,16 +18,6 @@ set "pos_lnk=%USERPROFILE%\×ÀÃæ\%pos_bat%.lnk"
 set "pos_lnk_old=%USERPROFILE%\Desktop\%pos_exe%.lnk"
 set "pos_lnk=%USERPROFILE%\Desktop\%pos_bat%.lnk"
 )
-
-echo %pos_lnk_old%
-echo %pos_lnk%
-pause
-exit
-
-:: echo %cd%
-mkdir "%pos_path%"
-d:
-cd "%pos_path%"
 
 :: Copy pos.bat to local d:\KSOA POS\
 copy /Y "%server%\src\pos.bat"
@@ -45,3 +41,8 @@ copy /Y "%newfile%" "%oldfile%"
 
 :: Remove alipay*.log
 del alipay2*.log
+
+:: Create 
+del updateid_*
+copy /Y NUL %updateid% > NUL
+:: echo. 2> %updateid%

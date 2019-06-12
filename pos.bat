@@ -7,11 +7,10 @@ set "pos_path=d:\KSOA POS"
 set "server=\\192.168.10.55\s"
 set "update_pos_bat=%server%\src\update_pos.bat"
 
-d:
-cd "%pos_path%"
-
 :: Run update_pos.bat
-"%update_pos_bat%"
+call "%update_pos_bat%"
 
 :: run pos
-start "%pos_exe%"
+d:
+cd "%pos_path%"
+start "" "%pos_exe%"
