@@ -7,16 +7,6 @@ set "pos_path=d:\KSOA POS"
 set "server=\\192.168.10.55\s"
 set "update_pos_bat=%server%\src\update_pos.bat"
 
-:: Is Windows XP?
-ver | find "5.1" > nul 
-if %errorlevel% equ 0 (
-set "pos_lnk_old=%USERPROFILE%\×ÀÃæ\%pos_exe%.lnk"
-set "pos_lnk=%USERPROFILE%\×ÀÃæ\%pos_bat%.lnk"
-) else (
-set "pos_lnk_old=%USERPROFILE%\Desktop\%pos_exe%.lnk"
-set "pos_lnk=%USERPROFILE%\Desktop\%pos_bat%.lnk"
-)
-
 d:
 cd "%pos_path%"
 
