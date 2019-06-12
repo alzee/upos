@@ -4,14 +4,9 @@
 set pos_exe=MTpos_jh.exe
 set pos_bat=pos.bat
 set "pos_path=d:\KSOA POS\"
-set "pos_lnk_old=%USERPROFILE%\Ê°åÈù¢\%pos_exe%.lnk"
-set "pos_lnk=%USERPROFILE%\Ê°åÈù¢\%pos_bat%.lnk"
-set "update_pos_bat=\\192.168.10.55\s\update_pos.bat"
-
-echo %pos_lnk%
-
-pause
-exit
+set "pos_lnk_old=%USERPROFILE%\◊¿√Ê\%pos_exe%.lnk"
+set "pos_lnk=%USERPROFILE%\◊¿√Ê\%pos_bat%.lnk"
+set "update_pos_bat=\\192.168.10.55\s\src\update_pos.bat"
 
 d:
 cd "%pos_path%"
@@ -22,6 +17,3 @@ cd "%pos_path%"
 
 :: run pos
 ::start %pos_exe%
-
-:: Remove lnk of 'MTpos_jh.exe' on desktop
-::del %pos_lnk_old%
