@@ -20,7 +20,6 @@ d:
 cd "%pos_path%"
 
 :: Run update_pos.bat
-:: copy /Y %update_pos_bat%
 %update_pos_bat%
 
 :: run pos
