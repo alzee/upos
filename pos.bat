@@ -9,12 +9,15 @@ set "update_pos_bat=%server%\src\update_pos.bat"
 set "online_flag=online_flag"
 
 d:
+if not exist "%pos_path%" md "%pos_path%"
 cd "%pos_path%"
 
 :: If can not connect to %server% in 2 seconds, don't run %update_pos_bat%
-del %online_flag%
-start /min if exist "%update_pos_bat%" echo. 2> %online_flag%
-timeout /t 2
+del %online_flag% 2> nul
+start /min if exist "%update_pos_bat%" copy /y nul %online_flag%
+:: XP don't have timeout
+:: timeout /t 2 /nobreak > nul
+ping -n 3 127.0.0.1 > nul
 if exist %online_flag% call "%update_pos_bat%"
 
 :: run pos
