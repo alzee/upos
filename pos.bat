@@ -22,3 +22,5 @@ if exist %online_flag% call "%update_pos_bat%"
 
 :: run pos
 start "" "%pos_exe%"
+
+taskkill /im cmd.exe

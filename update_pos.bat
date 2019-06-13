@@ -1,7 +1,7 @@
 @echo off
 set "newfile=%server%\pos\ybDevice.702.dll"
 set "oldfile=ybDevice.dll"
-set "updateid=updateid_20190613b"
+set "updateid=updateid_20190613c"
 
 if exist %updateid% exit /b
 
