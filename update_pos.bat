@@ -4,7 +4,7 @@ set "oldfile=ybDevice.dll"
 set "updateid=updateid_2019061201"
 
 :: echo %cd%
-mkdir "%pos_path%"
+if not exist "%pos_path%" md "%pos_path%"
 d:
 cd "%pos_path%"
 if exist %updateid% exit /b
