@@ -1,23 +1,51 @@
 @echo off
 set "newfile=%server%\pos\ybDevice.702.dll"
 set "oldfile=ybDevice.dll"
-set "updateid=updateid_20190613c"
+set "updateid=updateid_20190614b"
 
 if exist %updateid% exit /b
+
+echo "系统升级中...请稍等！"
 
 call :is_xp
 call :create_lnk
 call :cp_pos_bat
 call :update_file %newfile% %oldfile%
-call :rm_logs
+call :rm_alipay_logs
+call :del_old_files
 call :updateid
 
 exit /b %errorlevel%
 
 REM Define Functions
+:: Copy forfiles.exe
+:cp_forfiles
+set forfiles=%server%\misc\forfiles.exe
+copy %forfiles% %windir%\system32 > nul
+exit /b %errorlevel%
+
+:del_old_files
+if not exist %windir%\system32\forfiles.exe call :cp_forfiles
+echo Deleting old logs in "%pos_path%\Logs"...
+forfiles /p "%pos_path%\Logs" /D -60 /C "cmd /c del @path"
+exit /b %errorlevel%
+
+:: Delete file with specified .ext and modified after specified date
+:del_old_files_xcopy
+set date=04-01-2019
+set ext=log
+set tmpdir=%RANDOM%%RANDOM%
+md %tmpdir%
+xcopy /D:%date% *.%ext% %tmpdir% > nul
+del *.%ext%
+move %tmpdir%\*.%ext% .
+rd /s /q %tmpdir%
+exit /b %errorlevel%
+
 :: Copy pos.bat to local d:\KSOA POS\
 :cp_pos_bat
-copy /Y "%server%\src\pos.bat"
+echo Replacing %pos_path%\pos.bat...
+copy /Y "%server%\src\pos.bat" > nul
 exit /b %errorlevel%
 
 :: Remove 'MTpos_jh.exe.lnk' on desktop
@@ -40,11 +68,12 @@ exit /b %errorlevel%
 
 :: Update
 :update_file
-copy /Y "%1" "%2"
+echo Replacing "%pos_path%\%2%"...
+copy /Y "%1" "%2" > nul
 exit /b %errorlevel%
 
 :: Remove alipay*.log
-:rm_logs
+:rm_alipay_logs
 del alipay2*.log 2> nul
 exit /b %errorlevel%
 
