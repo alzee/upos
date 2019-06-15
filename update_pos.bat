@@ -5,7 +5,7 @@ set "updateid=updateid_20190614b"
 
 if exist %updateid% exit /b
 
-echo "系统升级中...请稍等！"
+echo "系统升级中...稍等！请勿关闭本窗口！"
 
 call :is_xp
 call :create_lnk
